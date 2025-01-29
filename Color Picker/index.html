@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Picker App</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      background-color: #f0f0f0;
+      transition: background-color 0.5s ease;
+    }
+
+    .container {
+      max-width: 450px;
+      margin: 100px auto;
+      padding: 30px;
+      border-radius: 12px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333;
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .color-picker-wrapper {
+      margin-top: 30px;
+      border: 2px solid #007bff;
+      border-radius: 10px;
+      padding: 10px;
+      display: inline-block;
+      background-color: #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="color"] {
+      width: 100px;
+      height: 100px;
+      padding: 10px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      background-color: transparent;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    input[type="color"]:hover {
+      transform: scale(1.1);
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 12px 20px;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .color-code {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #333;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Color Picker App</h1>
+    <div class="color-picker-wrapper">
+      <label for="colorPicker" style="font-size: 1.2rem; color: #007bff;">Pick a Color</label>
+      <br>
+      <input type="color" id="colorPicker" value="#f4f4f4">
+    </div>
+    <button id="applyButton">Apply Color</button>
+    <button id="resetButton">Reset</button>
+    <p class="color-code" id="colorCode">Selected Color: #f4f4f4</p>
+  </div>
+
+  <script>
+    // Grab elements from DOM
+    const colorPicker = document.getElementById('colorPicker');
+    const colorCode = document.getElementById('colorCode');
+    const applyButton = document.getElementById('applyButton');
+    const resetButton = document.getElementById('resetButton');
+
+    // Function to apply color
+    function applyColor() {
+      const selectedColor = colorPicker.value;
+      document.body.style.backgroundColor = selectedColor;
+      colorCode.textContent = `Selected Color: ${selectedColor}`;
+    }
+
+    // Function to reset color
+    function resetColor() {
+      const defaultColor = '#f4f4f4';
+      document.body.style.backgroundColor = defaultColor;
+      colorPicker.value = defaultColor;
+      colorCode.textContent = `Selected Color: ${defaultColor}`;
+    }
+
+    // Event listeners for buttons
+    applyButton.addEventListener('click', applyColor);
+    resetButton.addEventListener('click', resetColor);
+  </script>
+</body>
+</html>
