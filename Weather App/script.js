@@ -1,5 +1,10 @@
-document.getElementById("getWeatherBtn").addEventListener("click", async function() {
-    const apiKey = "014416f789bfe3b600a5dfe4385dd0ff";  // Your API Key
+async function getAPIKey() {
+    const response = await fetch("config.json");
+    const data = await response.json();
+    return data.API_KEY;
+}
+
+document.getElementById("getWeatherBtn").addEventListener("click", async function () {
     const city = document.getElementById("cityInput").value;
     const weatherBox = document.querySelector(".weather-box");
     const errorMessage = document.getElementById("errorMessage");
@@ -10,13 +15,12 @@ document.getElementById("getWeatherBtn").addEventListener("click", async functio
         return;
     }
 
+    const apiKey = await getAPIKey();  // Fetch API key from config.json
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     try {
         const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error("City not found");
-        }
+        if (!response.ok) throw new Error("City not found");
         const data = await response.json();
 
         document.getElementById("cityName").textContent = `📍 ${data.name}, ${data.sys.country}`;
